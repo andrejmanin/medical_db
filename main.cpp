@@ -1,7 +1,7 @@
-#include <iostream>
+#include "libs.h"
 
-using namespace std;
 int main() {
-
+    Menu menu;
+    menu.handleInput();
     return 0;
 }

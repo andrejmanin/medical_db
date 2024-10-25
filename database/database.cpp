@@ -1,18 +1,19 @@
 #include "database.h"
-#include <iostream>
 
-void Database::addPatient(const Patient& patient) {
-    patients.push_back(patient);
+void Database::addPatient(Patient& patient) {
+    Patient* tempPatient = new Patient(patient);
+    patients.push_back(tempPatient);
 }
 
-void Database::addDoctor(const Doctor& doctor) {
-    doctors.push_back(doctor);
+void Database::addDoctor(Doctor& doctor) {
+    Doctor* tempDoctor = new Doctor(doctor);
+    doctors.push_back(tempDoctor);
 }
 
 Patient* Database::findPatientByID(const std::string& patientID) {
     for (auto& patient : patients) {
-        if (patientID == patient.getPatientID()) {
-            return &patient;
+        if (patientID == patient->getPatientID()) {
+            return patient;
         }
     }
     return nullptr;
@@ -20,8 +21,8 @@ Patient* Database::findPatientByID(const std::string& patientID) {
 
 Doctor* Database::findDoctorByID(const std::string& doctorID) {
     for (auto& doctor : doctors) {
-        if (doctorID == doctor.getDoctorID()) {
-            return &doctor;
+        if (doctorID == doctor->getDoctorID()) {
+            return doctor;
         }
     }
     return nullptr;
@@ -29,14 +30,14 @@ Doctor* Database::findDoctorByID(const std::string& doctorID) {
 
 void Database::displayAllPatients() const {
     std::cout << "List of Patients:" << std::endl;
-    for (const auto& patient : patients) {
-        patient.displayInfo();
+    for (auto patient : patients) {
+        patient->displayInfo();
     }
 }
 
 void Database::displayAllDoctors() const {
     std::cout << "List of Doctors:" << std::endl;
     for (const auto& doctor : doctors) {
-        doctor.showInfo();
+        doctor->showInfo();
     }
 }

@@ -1,4 +1,6 @@
 #include "patient.h"
+#include <cstring>
+#include <iostream>
 
 Patient::Patient(const char* name, int age, Gender gender, const char* patientID, const char* address) {
     _name = new char[strlen(name) + 1];
@@ -11,6 +13,19 @@ Patient::Patient(const char* name, int age, Gender gender, const char* patientID
     strcpy(_address, address);
     _medicalHistory = new vector<MedicalRecord*>;
 }
+
+Patient::Patient(const Patient& patient) {
+    _name = new char[strlen(patient._name) + 1];
+    strcpy(_name, patient._name);
+    _age = patient._age;
+    _gender = patient._gender;
+    _patientID = new char[strlen(patient._patientID) + 1];
+    strcpy(_patientID, patient._patientID);
+    _address = new char[strlen(patient._address) + 1];
+    strcpy(_address, patient._address);
+    _medicalHistory = patient._medicalHistory;
+}
+
 Patient::~Patient() {
     delete[] _name;
     delete[] _patientID;

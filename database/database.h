@@ -1,19 +1,22 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include "../patient/patient.h"
+#include "../doctor/doctor.h"
+#include <string>
 #include <vector>
-#include "patient.h"
-#include "doctor.h"
+
+using namespace std;
 
 class Database {
-    std::vector<Patient> patients;
-    std::vector<Doctor> doctors;
+    vector<Patient*> patients;
+    vector<Doctor*> doctors;
 
 public:
-    void addPatient(const Patient& patient);
-    void addDoctor(const Doctor& doctor);
-    Patient* findPatientByID(const std::string& patientID);
-    Doctor* findDoctorByID(const std::string& doctorID);
+    void addPatient(Patient& patient);
+    void addDoctor(Doctor& doctor);
+    Patient* findPatientByID(const string& patientID);
+    Doctor* findDoctorByID(const string& doctorID);
     void displayAllPatients() const;
     void displayAllDoctors() const;
 };

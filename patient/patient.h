@@ -1,8 +1,10 @@
 #ifndef PATIENT_H
 #define PATIENT_H
 
-#include <cstring>
-#include "libs.h"
+#include "../medical_record/medical_record.h"
+#include <vector>
+
+using namespace std;
 
 enum Gender {
     Male,
@@ -19,10 +21,12 @@ class Patient {
 
 public:
     Patient(const char* name, int age, Gender gender, const char* patientID, const char* address);
+    Patient(const Patient& patient);
     ~Patient();
     void addRecord(MedicalRecord& record);
     void displayInfo() const;
     void displayMedicalHistory() const;
+    char* getPatientID() const { return _patientID; }
 };
 
 

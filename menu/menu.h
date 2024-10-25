@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "database.h"
+#include "../database/database.h"
 
 class Menu {
     Database database;

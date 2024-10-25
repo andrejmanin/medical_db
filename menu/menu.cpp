@@ -1,54 +1,64 @@
 #include "menu.h"
-#include <iostream>
+
+using namespace std;
 
 void Menu::displayMainMenu() {
-    std::cout << "Main Menu:" << std::endl;
-    std::cout << "1. Add Patient" << std::endl;
-    std::cout << "2. Add Doctor" << std::endl;
-    std::cout << "3. Display All Patients" << std::endl;
-    std::cout << "4. Display All Doctors" << std::endl;
-    std::cout << "5. Exit" << std::endl;
+    cout << "Main Menu:" << endl;
+    cout << "1. Add Patient" << endl;
+    cout << "2. Add Doctor" << endl;
+    cout << "3. Display All Patients" << endl;
+    cout << "4. Display All Doctors" << endl;
+    cout << "5. Exit" << endl;
 }
 
 void Menu::handleInput() {
     int choice;
     while (true) {
         displayMainMenu();
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
-
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cout << endl;
         switch (choice) {
         case 1: {
-            std::string name, patientID, address;
+            char* name = new char[25];
+            char* patientID = new char[25];
+            char* address = new char[25];
             int age;
             Gender gender;
 
-            std::cout << "Enter name: ";
-            std::cin >> name;
-            std::cout << "Enter age: ";
-            std::cin >> age;
-            std::cout << "Enter gender (0 for Male, 1 for Female): ";
+            cout << "Enter name: ";
+            cin.ignore();
+            cin.getline(name, 25);
+            cout << "Enter age: ";
+            cin >> age;
+            cout << "Enter gender (0 for Male, 1 for Female): ";
             int g;
-            std::cin >> g;
+            cin >> g;
             gender = (g == 0) ? Male : Female;
-            std::cout << "Enter patient ID: ";
-            std::cin >> patientID;
-            std::cout << "Enter address: ";
-            std::cin >> address;
+            cin.ignore();
 
-            Patient newPatient(name.c_str(), age, gender, patientID.c_str(), address.c_str());
+            cout << "Enter patient ID: ";
+            cin.getline(patientID, 25);
+            cout << "Enter address: ";
+            cin.getline(address, 25);
+
+            Patient newPatient(name, age, gender, patientID, address);
             database.addPatient(newPatient);
+
+            delete[] name;
+            delete[] patientID;
+            delete[] address;
             break;
         }
         case 2: {
-            std::string name, specialization, doctorID;
+            string name, specialization, doctorID;
 
-            std::cout << "Enter name: ";
-            std::cin >> name;
-            std::cout << "Enter specialization: ";
-            std::cin >> specialization;
-            std::cout << "Enter doctor ID: ";
-            std::cin >> doctorID;
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter specialization: ";
+            cin >> specialization;
+            cout << "Enter doctor ID: ";
+            cin >> doctorID;
 
             Doctor newDoctor(name.c_str(), specialization.c_str(), doctorID.c_str());
             database.addDoctor(newDoctor);
@@ -63,7 +73,8 @@ void Menu::handleInput() {
         case 5:
             return; 
         default:
-            std::cout << "Invalid choice. Please try again." << std::endl;
+            cout << "Invalid choice. Please try again." << endl;
         }
+        cout << endl;
     }
 }

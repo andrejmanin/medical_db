@@ -1,5 +1,8 @@
 #include "medical_record.h"
-#include "libs.h"
+#include <iostream>
+#include <cstring>
+
+using namespace std;
 
 MedicalRecord::MedicalRecord(const char* diseaseName, const char* treatmentPlan, const char* diagnosisDate, const char* doctorID) {
     _diseaseName = new char[strlen(diseaseName) + 1];

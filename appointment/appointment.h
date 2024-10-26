@@ -1,17 +1,17 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
 
-#include <string>
 #include <iostream>
+using namespace std;
 
 class Appointment {
-    std::string patientID;
-    std::string doctorID;
-    std::string appointmentDate;
-    std::string notes;
+    string patientID;
+    string doctorID;
+    string appointmentDate;
+    string notes;
 
 public:
-    Appointment(const std::string& pID, const std::string& dID, const std::string& date, const std::string& notes);
+    Appointment(const string& pID, const string& dID, const string& date, const string& notes);
     void displayAppointment() const;
 };
 
